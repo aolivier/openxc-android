@@ -15,3 +15,4 @@
 {"timestamp": 1332432977.840451, "name": "accelerator_pedal_position", "value": 14.0}
 {"timestamp": 1332432977.841059, "name": "odometer", "value": 124141}
 {"timestamp": 1332432977.841651, "name": "fine_odometer_since_restart", "value": 142.312423}
+{"timestamp": 1332432977.841651, "name": "passenger_occupancy_status", "value": true}

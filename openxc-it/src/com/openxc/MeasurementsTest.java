@@ -17,6 +17,7 @@ import com.openxc.measurements.Latitude;
 import com.openxc.measurements.Longitude;
 import com.openxc.measurements.Measurement;
 import com.openxc.measurements.Odometer;
+import com.openxc.measurements.PassengerOccupancyStatus;
 import com.openxc.measurements.SteeringWheelAngle;
 import com.openxc.measurements.TorqueAtTransmission;
 import com.openxc.measurements.TransmissionGearPosition;
@@ -221,6 +222,16 @@ public class MeasurementsTest extends ServiceTestCase<VehicleManager> {
         assertEquals(event.getValue().enumValue(),
                 VehicleDoorStatus.DoorId.DRIVER);
         assertEquals(event.getEvent().booleanValue(), true);
+    }
+
+    @MediumTest
+    public void testGetPassengerOccupancyStatus()
+            throws UnrecognizedMeasurementTypeException, NoValueException,
+            RemoteException, InterruptedException {
+        PassengerOccupancyStatus measurement = (PassengerOccupancyStatus)
+                service.get(PassengerOccupancyStatus.class);
+        checkReceivedMeasurement(measurement);
+        assertEquals(measurement.getValue().booleanValue(), true);
     }
 }
 
