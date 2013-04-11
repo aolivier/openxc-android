@@ -17,6 +17,7 @@ import com.openxc.measurements.Latitude;
 import com.openxc.measurements.Longitude;
 import com.openxc.measurements.Measurement;
 import com.openxc.measurements.Odometer;
+import com.openxc.measurements.OutsideAirTemperature;
 import com.openxc.measurements.SteeringWheelAngle;
 import com.openxc.measurements.TorqueAtTransmission;
 import com.openxc.measurements.TransmissionGearPosition;
@@ -221,6 +222,15 @@ public class MeasurementsTest extends ServiceTestCase<VehicleManager> {
         assertEquals(event.getValue().enumValue(),
                 VehicleDoorStatus.DoorId.DRIVER);
         assertEquals(event.getEvent().booleanValue(), true);
+    }
+
+    @MediumTest
+    public void testGetOutsideAirTemperature() throws UnrecognizedMeasurementTypeException,
+            NoValueException, RemoteException, InterruptedException {
+        OutsideAirTemperature measurement = (OutsideAirTemperature)
+                service.get(OutsideAirTemperature.class);
+        checkReceivedMeasurement(measurement);
+        assertEquals(measurement.getValue().doubleValue(), 21.3);
     }
 }
 
