@@ -18,6 +18,7 @@ import com.openxc.measurements.Longitude;
 import com.openxc.measurements.Measurement;
 import com.openxc.measurements.Odometer;
 import com.openxc.measurements.SteeringWheelAngle;
+import com.openxc.measurements.TirePressure;
 import com.openxc.measurements.TorqueAtTransmission;
 import com.openxc.measurements.TransmissionGearPosition;
 import com.openxc.measurements.UnrecognizedMeasurementTypeException;
@@ -221,6 +222,17 @@ public class MeasurementsTest extends ServiceTestCase<VehicleManager> {
         assertEquals(event.getValue().enumValue(),
                 VehicleDoorStatus.DoorId.DRIVER);
         assertEquals(event.getEvent().booleanValue(), true);
+    }
+
+    @MediumTest
+    public void testGetTirePressure()
+            throws UnrecognizedMeasurementTypeException, NoValueException,
+            RemoteException, InterruptedException {
+        TirePressure event = (TirePressure) service.get(TirePressure.class);
+        checkReceivedMeasurement(event);
+        assertEquals(event.getValue().enumValue(),
+                TirePressure.TireId.FRONT_LEFT);
+        assertEquals(event.getEvent().doubleValue(), 32.1);
     }
 }
 
