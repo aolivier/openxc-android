@@ -13,10 +13,13 @@ import com.openxc.measurements.FuelConsumed;
 import com.openxc.measurements.FuelLevel;
 import com.openxc.measurements.HeadlampStatus;
 import com.openxc.measurements.HighBeamStatus;
+import com.openxc.measurements.LateralAcceleration;
 import com.openxc.measurements.Latitude;
 import com.openxc.measurements.Longitude;
+import com.openxc.measurements.LongitudinalAcceleration;
 import com.openxc.measurements.Measurement;
 import com.openxc.measurements.Odometer;
+import com.openxc.measurements.RollRate;
 import com.openxc.measurements.SteeringWheelAngle;
 import com.openxc.measurements.TorqueAtTransmission;
 import com.openxc.measurements.TransmissionGearPosition;
@@ -25,6 +28,7 @@ import com.openxc.measurements.VehicleButtonEvent;
 import com.openxc.measurements.VehicleDoorStatus;
 import com.openxc.measurements.VehicleSpeed;
 import com.openxc.measurements.WindshieldWiperStatus;
+import com.openxc.measurements.YawRate;
 import com.openxc.sources.trace.TraceVehicleDataSource;
 
 public class MeasurementsTest extends ServiceTestCase<VehicleManager> {
@@ -221,6 +225,38 @@ public class MeasurementsTest extends ServiceTestCase<VehicleManager> {
         assertEquals(event.getValue().enumValue(),
                 VehicleDoorStatus.DoorId.DRIVER);
         assertEquals(event.getEvent().booleanValue(), true);
+    }
+
+    @MediumTest
+    public void testGetLateralAcceleration() throws UnrecognizedMeasurementTypeException,
+            NoValueException, RemoteException, InterruptedException {
+        LateralAcceleration measurement = (LateralAcceleration) service.get(LateralAcceleration.class);
+        checkReceivedMeasurement(measurement);
+        assertEquals(measurement.getValue().doubleValue(), 1.1);
+    }
+
+    @MediumTest
+    public void testGetLongitudinalAcceleration() throws UnrecognizedMeasurementTypeException,
+            NoValueException, RemoteException, InterruptedException {
+        LongitudinalAcceleration measurement = (LongitudinalAcceleration) service.get(LongitudinalAcceleration.class);
+        checkReceivedMeasurement(measurement);
+        assertEquals(measurement.getValue().doubleValue(), 2.2);
+    }
+
+    @MediumTest
+    public void testGetYawRate() throws UnrecognizedMeasurementTypeException,
+            NoValueException, RemoteException, InterruptedException {
+        YawRate measurement = (YawRate) service.get(YawRate.class);
+        checkReceivedMeasurement(measurement);
+        assertEquals(measurement.getValue().doubleValue(), 3.3);
+    }
+
+    @MediumTest
+    public void testGetRollRate() throws UnrecognizedMeasurementTypeException,
+            NoValueException, RemoteException, InterruptedException {
+        RollRate measurement = (RollRate) service.get(RollRate.class);
+        checkReceivedMeasurement(measurement);
+        assertEquals(measurement.getValue().doubleValue(), 4.4);
     }
 }
 
